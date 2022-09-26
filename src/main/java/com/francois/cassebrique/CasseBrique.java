@@ -58,10 +58,10 @@ public class CasseBrique extends Canvas {
             dessin.fillOval(balle.getX() + balle.getDecalle2(), balle.getY() + balle.decalle2 ,balle.getDiametre2(),balle.getDiametre2());
 
             if (balle.getX() < 0 || balle.getX() > 500- balle.diametre) {
-                balle.setVitesseHorizontale(balle.getVitesseHorizontale() *-1);
+                balle.inverseVitesseHorizontale();
             }
             if (balle.getY() < 0 || balle.getY() > 500 - balle.getDiametre()){
-                balle.setVitesseVerticale(balle.getVitesseVerticale() * -1);
+                balle.inverseVitesseVertical();
             }
 
 
