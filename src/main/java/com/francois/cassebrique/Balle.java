@@ -34,6 +34,13 @@ public class Balle {
 
     }
 
+    public void deplacement() {
+
+    x += vitesseHorizontale;
+    y += vitesseVerticale;
+
+    }
+
     public int getX() {
         return x;
     }
