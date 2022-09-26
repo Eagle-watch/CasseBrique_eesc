@@ -5,13 +5,16 @@ import java.awt.*;
 
 public class CasseBrique extends Canvas {
 
+    protected int largeurEcran = 500;
+    protected int hauteurEcran = 600;
+
     public CasseBrique() throws InterruptedException {
         JFrame fenetre = new JFrame("Casse brique");
         //On récupère le panneau de la fenetre principale
         JPanel panneau = (JPanel) fenetre.getContentPane();
         //On définie la hauteur / largeur de l'écran
-        panneau.setPreferredSize(new Dimension(500, 500));
-        setBounds(0, 0, 500,500);
+        panneau.setPreferredSize(new Dimension(largeurEcran, hauteurEcran));
+        setBounds(0, 0, largeurEcran,hauteurEcran);
         //On ajoute cette classe (qui hérite de Canvas) comme composant du panneau principal
         panneau.add(this);
 
@@ -33,6 +36,7 @@ public class CasseBrique extends Canvas {
     public void demarrer() throws InterruptedException {
 
         int indexFrame = 0;
+
        Balle balle = new Balle(
                250,
                250,
@@ -47,19 +51,16 @@ public class CasseBrique extends Canvas {
             //---------------
             // RESET DESSIN
             dessin.setColor(Color.WHITE);
-            dessin.fillRect(0,0,500,500);
+            dessin.fillRect(0,0,largeurEcran,hauteurEcran);
 
             //Dessin Balle
             balle.deplacement();
-            dessin.setColor(balle.getCouleur());
-            dessin.fillOval(balle.getX(), balle.getY(), balle.getDiametre(), balle.getDiametre());
-            dessin.setColor(Color.WHITE);
-            dessin.fillOval(balle.getX() + balle.getDecalle2(), balle.getY() + balle.decalle2 ,balle.getDiametre2(),balle.getDiametre2());
+            balle.dessiner(dessin);
 
-            if (balle.getX() < 0 || balle.getX() > 500- balle.diametre) {
+            if (balle.getX() < 0 || balle.getX() > largeurEcran- balle.diametre) {
                 balle.inverseVitesseHorizontale();
             }
-            if (balle.getY() < 0 || balle.getY() > 500 - balle.getDiametre()){
+            if (balle.getY() < 0 || balle.getY() > hauteurEcran - balle.getDiametre()){
                 balle.inverseVitesseVertical();
             }
 
