@@ -1,6 +1,7 @@
 package com.francois.cassebrique;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Balle {
 
@@ -51,6 +52,17 @@ public class Balle {
                 y + decalle2,
                 diametre2,
                 diametre2);
+    }
+
+    public void testCollision (int largeurEcran, int hauteurEcran) {
+
+        if (x < 0 || x > largeurEcran- diametre) {
+            inverseVitesseHorizontale();
+        }
+        if (y < 0 || y > hauteurEcran - diametre) {
+            inverseVitesseVertical();
+        }
+
     }
 
     public int getX() {

@@ -2,11 +2,14 @@ package com.francois.cassebrique;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class CasseBrique extends Canvas {
 
     protected int largeurEcran = 500;
     protected int hauteurEcran = 600;
+
+    protected int i=0;
 
     public CasseBrique() throws InterruptedException {
         JFrame fenetre = new JFrame("Casse brique");
@@ -35,15 +38,21 @@ public class CasseBrique extends Canvas {
 
     public void demarrer() throws InterruptedException {
 
-        int indexFrame = 0;
+        long indexFrame = 0;
+        ArrayList<Balle> listeBalles = new ArrayList<>();
 
-       Balle balle = new Balle(
-               250,
-               250,
-               4,
-               -6 ,
-               30,
-               Color.GREEN);
+       for (i=0 ; i<100; i ++) {
+           Balle balle1 = new Balle(
+                   (int)(Math.random() *largeurEcran),
+                   (int)(Math.random() *hauteurEcran),
+                   2,
+                   5 ,
+                   30,
+                   Color.GREEN);
+
+           listeBalles.add(balle1);
+       }
+
 
         while(true) {
             indexFrame ++;
@@ -53,18 +62,14 @@ public class CasseBrique extends Canvas {
             dessin.setColor(Color.WHITE);
             dessin.fillRect(0,0,largeurEcran,hauteurEcran);
 
-            //Dessin Balle
-            balle.deplacement();
-            balle.dessiner(dessin);
 
-            if (balle.getX() < 0 || balle.getX() > largeurEcran- balle.diametre) {
-                balle.inverseVitesseHorizontale();
+            for (Balle balle : listeBalles) {
+
+                //Dessin Balle
+                balle.deplacement();
+                balle.dessiner(dessin);
+                balle.testCollision(largeurEcran,hauteurEcran);
             }
-            if (balle.getY() < 0 || balle.getY() > hauteurEcran - balle.getDiametre()){
-                balle.inverseVitesseVertical();
-            }
-
-
             //---------------
             dessin.dispose();
             getBufferStrategy().show();
