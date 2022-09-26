@@ -10,7 +10,7 @@ public class CasseBrique extends Canvas {
     protected int hauteurEcran = 600;
 
     protected int i=0;
-
+    protected ArrayList<Balle> listePoints = new ArrayList<>();
     public CasseBrique() throws InterruptedException {
         JFrame fenetre = new JFrame("Casse brique");
         //On récupère le panneau de la fenetre principale
@@ -41,13 +41,13 @@ public class CasseBrique extends Canvas {
         long indexFrame = 0;
         ArrayList<Balle> listeBalles = new ArrayList<>();
 
-       for (i=0 ; i<100; i ++) {
+       for (i=0 ; i<1; i ++) {
            Balle balle1 = new Balle(
                    (int)(Math.random() *largeurEcran),
                    (int)(Math.random() *hauteurEcran),
-                   2,
-                   5 ,
-                   30,
+                   (int) (Math.random() * 10) - 5,
+                   (int) (Math.random() * 10) - 5,
+                   (int) (Math.random() * 25) + 5,
                    Color.GREEN);
 
            listeBalles.add(balle1);
@@ -70,6 +70,17 @@ public class CasseBrique extends Canvas {
                 balle.dessiner(dessin);
                 balle.testCollision(largeurEcran,hauteurEcran);
             }
+
+//            if (indexFrame % 2 ==0) {
+//
+//                Balle balle1 = new Balle(
+//                        (int)(Math.random() *largeurEcran),
+//                        (int)(Math.random() *hauteurEcran),
+//                        0,
+//                        0 ,
+//                        8,
+//                        Color.black);
+//            } ne pas tenir compte exo non finis
             //---------------
             dessin.dispose();
             getBufferStrategy().show();

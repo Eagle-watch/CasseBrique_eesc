@@ -14,15 +14,16 @@ public class Balle {
     protected  int decalle2;
     protected Color couleur;
 
+//    protected ArrayList<Balle> listePoints = new ArrayList<>(); exo non fini
+
     public Balle(int x, int y, int vitesseHorizontale, int vitesseVerticale, int diametre, Color couleur) {
         this.x = x;
         this.y = y;
-        this.vitesseHorizontale = vitesseHorizontale;
-        this.vitesseVerticale = vitesseVerticale;
+        this.vitesseHorizontale = vitesseHorizontale == 0 ? 1 : vitesseHorizontale;
+        this.vitesseVerticale = vitesseVerticale == 0 ? 1 : vitesseVerticale;
         this.couleur = couleur;
         this.setDiametre(diametre);
     }
-
     public void inverseVitesseVertical() {
 
         vitesseVerticale *= -1;
@@ -43,6 +44,16 @@ public class Balle {
     }
 
     public void dessiner(Graphics2D dessin) {
+
+//        long indexFrame = 0;  Ne pas tenir compte exo non finis !!!!
+//        indexFrame ++;
+//
+//        if (indexFrame % 10 == 0){
+//
+//            listePoints.add(points);
+//
+//        }
+
 
         dessin.setColor(couleur);
         dessin.fillOval(x,y,diametre,diametre);
