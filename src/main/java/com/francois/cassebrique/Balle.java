@@ -14,9 +14,9 @@ public class Balle {
     protected  int decalle2;
     protected Color couleur;
 
-    protected long indexFrame = 0;
+    protected int indexFrame = 0;
 
-    protected ArrayList<Balle> listePoints = new ArrayList<>();
+    protected Balle[] listePoints = new Balle[10];
 
     public Balle(int x, int y, int vitesseHorizontale, int vitesseVerticale, int diametre, Color couleur) {
         this.x = x;
@@ -33,6 +33,7 @@ public class Balle {
         this.couleur = Color.BLACK;
         this.setDiametre(5);
     }
+
     public void inverseVitesseVertical() {
 
         vitesseVerticale *= -1;
@@ -52,14 +53,37 @@ public class Balle {
 
     }
 
+    int indexPoint = 0;
+
     public void dessiner(Graphics2D dessin) {
-
-
         indexFrame ++;
+
+        //Balle[] tableauBalle = new Balle[10];
+
+
+        //int dizaines = (indexFrame/10)%10;
 
         if (indexFrame % 10 == 0 && vitesseHorizontale != 0 && vitesseVerticale != 0)
         {
-            listePoints.add(new Balle(x,y));
+
+
+
+            if(indexFrame < 100) {
+                listePoints[indexPoint] = new Balle(x, y);
+            } else {
+
+                listePoints[indexPoint].setX(x);
+                listePoints[indexPoint].setY(y);
+
+            }
+
+            indexPoint++;
+
+            if(indexPoint == 9) {
+                indexPoint = 0;
+            }
+
+
         }
 
 
@@ -73,7 +97,9 @@ public class Balle {
                 diametre2);
 
        for (Balle balle:listePoints) {
-            balle.dessiner(dessin);
+           if(balle != null) {
+               balle.dessiner(dessin);
+           }
         }
     }
 
