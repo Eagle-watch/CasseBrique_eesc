@@ -3,10 +3,8 @@ package com.francois.cassebrique;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Balle {
+public class Balle extends Sprite{
 
-    protected  int x;
-    protected  int y;
     protected  int vitesseHorizontale;
     protected  int vitesseVerticale;
     protected  int diametre;
@@ -16,11 +14,10 @@ public class Balle {
 
     protected int indexFrame = 0;
 
-    protected Balle[] listePoints = new Balle[10];
+    protected Point[] listePoints = new Point[10];
 
     public Balle(int x, int y, int vitesseHorizontale, int vitesseVerticale, int diametre, Color couleur) {
-        this.x = x;
-        this.y = y;
+        super(x,y);
         this.vitesseHorizontale = vitesseHorizontale == 0 ? 1 : vitesseHorizontale;
         this.vitesseVerticale = vitesseVerticale == 0 ? 1 : vitesseVerticale;
         this.couleur = couleur;
@@ -28,8 +25,7 @@ public class Balle {
     }
 
     public Balle(int x, int y) {
-        this.x = x;
-        this.y = y;
+        super (x,y);
         this.couleur = Color.BLACK;
         this.setDiametre(5);
     }
@@ -52,26 +48,23 @@ public class Balle {
     y += vitesseVerticale;
 
     }
-
+    @Override
     public void dessiner(Graphics2D dessin) {
         indexFrame ++;
 
         if (indexFrame % 10 == 0 && vitesseHorizontale != 0 && vitesseVerticale != 0)
         {
 
-
         int indexPoint = (int)((indexFrame / 10) % 10);
             if(indexFrame <= 100) {
-                listePoints[indexPoint] = new Balle(x, y);
+                listePoints[indexPoint] = new Point(x, y);
             } else {
 
                 listePoints[indexPoint].setX(x);
                 listePoints[indexPoint].setY(y);
 
             }
-
         }
-
 
         dessin.setColor(couleur);
         dessin.fillOval(x,y,diametre,diametre);
@@ -82,9 +75,9 @@ public class Balle {
                 diametre2,
                 diametre2);
 
-       for (Balle balle:listePoints) {
-           if(balle != null) {
-               balle.dessiner(dessin);
+       for (Point point:listePoints) {
+           if(point != null) {
+               point.dessiner(dessin);
            }
         }
     }
