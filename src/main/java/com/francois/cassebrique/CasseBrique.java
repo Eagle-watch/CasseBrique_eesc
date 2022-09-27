@@ -71,16 +71,6 @@ public class CasseBrique extends Canvas {
                 balle.testCollision(largeurEcran,hauteurEcran);
             }
 
-//            if (indexFrame % 2 ==0) {
-//
-//                Balle balle1 = new Balle(
-//                        (int)(Math.random() *largeurEcran),
-//                        (int)(Math.random() *hauteurEcran),
-//                        0,
-//                        0 ,
-//                        8,
-//                        Color.black);
-//            } ne pas tenir compte exo non finis
             //---------------
             dessin.dispose();
             getBufferStrategy().show();

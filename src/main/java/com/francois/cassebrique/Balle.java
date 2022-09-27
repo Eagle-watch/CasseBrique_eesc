@@ -53,22 +53,15 @@ public class Balle {
 
     }
 
-    int indexPoint = 0;
-
     public void dessiner(Graphics2D dessin) {
         indexFrame ++;
-
-        //Balle[] tableauBalle = new Balle[10];
-
-
-        //int dizaines = (indexFrame/10)%10;
 
         if (indexFrame % 10 == 0 && vitesseHorizontale != 0 && vitesseVerticale != 0)
         {
 
 
-
-            if(indexFrame < 100) {
+        int indexPoint = (int)((indexFrame / 10) % 10);
+            if(indexFrame <= 100) {
                 listePoints[indexPoint] = new Balle(x, y);
             } else {
 
@@ -76,13 +69,6 @@ public class Balle {
                 listePoints[indexPoint].setY(y);
 
             }
-
-            indexPoint++;
-
-            if(indexPoint == 9) {
-                indexPoint = 0;
-            }
-
 
         }
 
