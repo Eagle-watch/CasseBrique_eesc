@@ -14,7 +14,9 @@ public class Balle {
     protected  int decalle2;
     protected Color couleur;
 
-//    protected ArrayList<Balle> listePoints = new ArrayList<>(); exo non fini
+    protected long indexFrame = 0;
+
+    protected ArrayList<Balle> listePoints = new ArrayList<>();
 
     public Balle(int x, int y, int vitesseHorizontale, int vitesseVerticale, int diametre, Color couleur) {
         this.x = x;
@@ -23,6 +25,13 @@ public class Balle {
         this.vitesseVerticale = vitesseVerticale == 0 ? 1 : vitesseVerticale;
         this.couleur = couleur;
         this.setDiametre(diametre);
+    }
+
+    public Balle(int x, int y) {
+        this.x = x;
+        this.y = y;
+        this.couleur = Color.BLACK;
+        this.setDiametre(5);
     }
     public void inverseVitesseVertical() {
 
@@ -45,14 +54,13 @@ public class Balle {
 
     public void dessiner(Graphics2D dessin) {
 
-//        long indexFrame = 0;  Ne pas tenir compte exo non finis !!!!
-//        indexFrame ++;
-//
-//        if (indexFrame % 10 == 0){
-//
-//            listePoints.add(points);
-//
-//        }
+
+        indexFrame ++;
+
+        if (indexFrame % 10 == 0 && vitesseHorizontale != 0 && vitesseVerticale != 0)
+        {
+            listePoints.add(new Balle(x,y));
+        }
 
 
         dessin.setColor(couleur);
@@ -63,6 +71,10 @@ public class Balle {
                 y + decalle2,
                 diametre2,
                 diametre2);
+
+       for (Balle balle:listePoints) {
+            balle.dessiner(dessin);
+        }
     }
 
     public void testCollision (int largeurEcran, int hauteurEcran) {
